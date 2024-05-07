@@ -1,16 +1,18 @@
-// const dbConnect = require("./mongodb");
-// const express = require("express");
-// const app = express();
+const dbConnect = require("./mongodb");
+const express = require("express");
+const app = express();
 
-// app.use(express.json());
+app.use(express.json());
+app.get("/", async (res, resp) => {
+  let data = await dbConnect();
+  data = await data.find().toArray();
+  resp.send(data);
+});
 
-// app.get("/", (req, resp) => {
-//   //   let data = await dbConnect();
-//   //   data = await data.find().toArray();
-//   //   console.log(data);
-//   //   console.warn(data);
+app.post("/", async (req, resp) => {
+  let data = await dbConnect();
+  let result = await data.insertOne(req.body);
+  resp.send(result);
+});
 
-//   resp.send({ name: "anil" });
-// });
-
-// app.listen(5173);
+app.listen(5173);
