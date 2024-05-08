@@ -32,7 +32,7 @@ app.delete("/:id", async (req, resp) => {
   const result = await data.deleteOne({
     _id: new mongodb.ObjectId(req.params.id),
   });
-  resp.send({ result: "yoyoyo" });
+  resp.send({ result: "delete vo" });
 });
 
 app.listen(5173);
